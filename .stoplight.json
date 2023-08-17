@@ -1,0 +1,10 @@
+{
+  "formats": {
+    "openapi": {
+      "rootDir": "hidden"
+    },
+    "json_schema": {
+      "rootDir": "hidden"
+    }
+  }
+}

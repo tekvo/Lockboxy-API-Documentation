@@ -1,75 +1,322 @@
 {
-    "openapi": "3.0.0",
-    "paths": {
-      
-        "/api/v1/form/list": {
-            "get": {
-                "operationId": "WorkspaceApiCallController_fetchAllForms",
-                "summary": "**Get your forms you created in the lockboxy**",
-                "parameters": [
-                    { "name": "SECRET-KEY", "in": "header", "description": "you can find this secret in the account api section", "required": true, "schema": { "type": "string" } },
-                    { "name": "page", "required": false, "in": "query", "schema": { "default": 1, "type": "number" } },
-                    { "name": "limit", "required": false, "in": "query", "schema": { "default": 10, "type": "number" } }
-                ],
-                "responses": { "200": { "description": "" } },
-                "tags": ["api-key"]
-            }
-        },
-        "/api/v1/form/schema": {
-            "get": {
-                "operationId": "WorkspaceApiCallController_findFormByID",
-                "summary": "**Get form by ID**",
-                "parameters": [
-                    { "name": "SECRET-KEY", "in": "header", "description": "you can find this secret in the account api section", "required": true, "schema": { "type": "string" } },
-                    { "name": "formID", "required": true, "in": "query", "schema": { "type": "string" } }
-                ],
-                "responses": { "200": { "description": "" } },
-                "tags": ["api-key"]
-            }
-        },
-        "/api/v1/form/save": {
-            "post": {
-                "operationId": "WorkspaceApiCallController_saveFormData",
-                "summary": "**Save form data by form ID**",
-                "parameters": [{ "name": "SECRET-KEY", "in": "header", "description": "you can find this secret in the account api section", "required": true, "schema": { "type": "string" } }],
-                "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SaveForm" } } } },
-                "responses": { "201": { "description": "" } },
-                "tags": ["api-key"]
-            }
-        },
-        "/api/v1/table/list": {
-            "get": {
-                "operationId": "WorkspaceApiCallController_fetchTableList",
-                "summary": "**Get form data by form ID**",
-                "parameters": [
-                    { "name": "SECRET-KEY", "in": "header", "description": "you can find this secret in the account api section", "required": true, "schema": { "type": "string" } },
-                    { "name": "page", "required": false, "in": "query", "schema": { "default": 1, "type": "number" } },
-                    { "name": "limit", "required": false, "in": "query", "schema": { "default": 10, "type": "number" } }
-                ],
-                "responses": { "200": { "description": "" } },
-                "tags": ["api-key"]
-            }
-        },
-        "/api/v1/table": {
-            "post": {
-                "operationId": "WorkspaceApiCallController_fetchFormData",
-                "summary": "**Get form data by table ID**",
-                "parameters": [{ "name": "SECRET-KEY", "in": "header", "description": "you can find this secret in the account api section", "required": true, "schema": { "type": "string" } }],
-                "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NotionQueryDto" } } } },
-                "responses": { "201": { "description": "" } },
-                "tags": ["api-key"]
-            }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lockboxy",
+    "description": "Lockboxy Api integration documents",
+    "version": "v1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "SaveForm": {
+        "type": "object",
+        "required": ["objectID"],
+        "properties": {
+          "objectID": {
+            "type": "string",
+            "description": "Form ID"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormData"
+            },
+            "description": "Form data"
+          }
         }
+      },
+
+      "FormData": {
+        "type": "object",
+        "properties": {
+          "hubTableID": {
+            "type": "string",
+            "description": "Hub table ID (optional)",
+            "required": false
+          },
+          "notionCellCode": {
+            "type": "string",
+            "description": "Notion cell code (optional)",
+            "required": false
+          },
+          "value": {
+            "type": "string",
+            "description": "Form field value (optional)",
+            "required": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of form field (optional)",
+            "required": false
+          }
+        }
+      },
+      "NotionQueryDto": {
+        "type": "object",
+        "required": ["referenceObjectID"],
+        "properties": {
+          "searchQuery": {
+            "type": "string",
+            "example": "search query",
+            "description": "search query (optional)",
+            "required": false
+          },
+          "column": {
+            "type": "string",
+            "description": "column(optional)",
+            "required": false
+          },
+          "direction": {
+            "type": "string",
+            "description": "direction (optional)",
+            "required": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "limit (optional)",
+            "required": false
+          },
+          "filter": {
+            "type": "array",
+            "description": "filter (optional)",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "required": false
+          },
+          "referenceObjectID": {
+            "type": "array",
+            "description": "referenceObjectID",
+            "example": ["305b7fe9-76e7-11ee-a9f5-0268af826409"],
+            "items": {
+              "type": "string",
+              "example": "305b7fe9-76e7-11ee-a9f5-0268af826409"
+            }
+          }
+        }
+      },
+
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "description": "operator (optional)"
+          },
+          "value": {
+            "type": "string",
+            "description": "value (optional)"
+          },
+          "column": {
+            "type": "string",
+            "description": "column (optional)"
+          }
+        },
+        "required": false
+      }
     },
-    "info": { "title": "Lockboxy", "description": "Lockboxy Api integration documents", "version": "v1", "contact": {} },
-    "tags": [],
-    "servers": [],
-    "components": {
-        "generateApiKey": {
-            "access-token": { "scheme": "Bearer", "bearerFormat": "Bearer", "description": "[just text field] Please enter token in following format: Bearer <JWT>", "name": "Authorization", "type": "http", "in": "Header" }
-        },
-        "securitySchemes": {
-            "access-token": { "scheme": "Bearer", "bearerFormat": "Bearer", "description": "[just text field] Please enter token in following format: Bearer <JWT>", "name": "Authorization", "type": "http", "in": "Header" }
-        }
+    "generateApiKey": {
+      "access-token": {
+        "scheme": "Bearer",
+        "bearerFormat": "Bearer",
+        "description": "[just text field] Please enter token in following format: Bearer <JWT>",
+        "name": "Authorization",
+        "type": "http",
+        "in": "Header"
+      }
+    },
+    "securitySchemes": {
+      "access-token": {
+        "scheme": "Bearer",
+        "bearerFormat": "Bearer",
+        "description": "[just text field] Please enter token in following format: Bearer <JWT>",
+        "name": "Authorization",
+        "type": "http",
+        "in": "Header"
+      }
     }
+  },
+  "paths": {
+    "/api/v1/form/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchAllForms",
+        "summary": "Get your forms list",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": ["api-key"]
+      }
+    },
+    "/api/v1/form/schema": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_findFormByID",
+        "summary": "Get form schema by ID",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formID",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": ["api-key"]
+      }
+    },
+    "/api/v1/form/save": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_saveFormData",
+        "summary": "Save form data by form ID",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["api-key"]
+      }
+    },
+    "/api/v1/table/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchTableList",
+        "summary": "Get All table data",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": ["api-key"]
+      }
+    },
+    "/api/v1/table": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_fetchFormData",
+        "summary": "Get notion table data",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotionQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["api-key"]
+      }
+    }
+  }
 }

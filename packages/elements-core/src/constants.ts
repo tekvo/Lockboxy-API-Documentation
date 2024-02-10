@@ -68,7 +68,7 @@ export const HttpMethodColors = {
   patch: 'warning',
   delete: 'danger',
 } as const;
-
+export const DEFAULT_API_URL = 'https://api.lockboxy.io';
 export const HttpCodeColor = {
   0: 'red',
   1: 'gray',

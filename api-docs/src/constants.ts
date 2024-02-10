@@ -1,5 +1,4 @@
-export const DEFAULT_API_URL =
-  'https://raw.githubusercontent.com/stoplightio/elements/main/demo/src/reference/todo.v1.yaml';
+export const DEFAULT_API_URL = 'api.lockboxy.io';
 
 export const EXAMPLE_SPECS = [
   {

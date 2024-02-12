@@ -13,6 +13,7 @@ import {
 } from './Auth/authentication-utils';
 import { BodyParameterValues, createRequestBody } from './Body/request-body-utils';
 import { MockData } from './Mocking/mocking-utils';
+import { DEFAULT_API_URL } from '@stoplight/elements-core/constants';
 
 type NameAndValue = {
   name: string;
@@ -41,11 +42,12 @@ const getServerUrl = ({
 }: Pick<BuildRequestInput, 'httpOperation' | 'chosenServer' | 'mockData' | 'corsProxy'>) => {
   const server = chosenServer || httpOperation.servers?.[0];
   const chosenServerUrl = server && getServerUrlWithDefaultValues(server);
-  const serverUrl = mockData?.url || chosenServerUrl || window.location.origin;
+  const serverUrl = mockData?.url || chosenServerUrl || DEFAULT_API_URL;
 
   if (corsProxy && !mockData) {
     return `${corsProxy}${serverUrl}`;
   }
+
 
   return serverUrl;
 };

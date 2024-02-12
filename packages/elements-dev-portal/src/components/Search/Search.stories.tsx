@@ -28,7 +28,6 @@ const SearchWrapper = ({ projectIds, workspaceId }: SearchWrapperProps) => {
   };
 
   const handleClick = (searchResult: NodeSearchResult) => {
-    console.log('Search clicked', searchResult);
     window.open(
       `https://${workspace?.workspace.slug}.stoplight.io/docs/${searchResult.project_slug}${searchResult.uri}`,
       '_blank',

@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useAtomValue } from 'jotai/utils';
 import * as React from 'react';
 
-import { HttpMethodColors } from '../../../constants';
+import { HttpMethodColors, DEFAULT_API_URL } from '../../../constants';
 import { MockingContext } from '../../../containers/MockingProvider';
 import { useResolvedObject } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
@@ -105,7 +105,7 @@ type MethodPathProps = { method: IHttpOperation['method']; path: string };
 function MethodPath({ method, path }: MethodPathProps) {
   const chosenServer = useAtomValue(chosenServerAtom);
 
-  let chosenServerUrl = '';
+  let chosenServerUrl = DEFAULT_API_URL;
   if (chosenServer) {
     chosenServerUrl = chosenServer.url.endsWith('/') ? chosenServer.url.slice(0, -1) : chosenServer.url;
   }

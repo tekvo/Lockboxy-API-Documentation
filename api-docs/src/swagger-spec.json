@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/v1/form/list": {
+    "/api/v1": {
       "get": {
         "operationId": "WorkspaceApiCallController_fetchAllForms",
         "summary": "**Get your forms you created in the lockboxy**",
@@ -13,6 +13,7 @@
             "required": true,
             "schema": { "type": "string" }
           },
+          { "name": "endpoint", "required": true, "in": "query", "schema": { "default": "table/list", "type": "string" }},
           { "name": "page", "required": false, "in": "query", "schema": { "default": 1, "type": "number" } },
           { "name": "limit", "required": false, "in": "query", "schema": { "default": 10, "type": "number" } }
         ],

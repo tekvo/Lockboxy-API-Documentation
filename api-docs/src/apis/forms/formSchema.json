@@ -1,0 +1,18 @@
+{
+    "get": {
+      "operationId": "WorkspaceApiCallController_findFormByID",
+      "summary": "Get form by ID",
+      "parameters": [
+        {
+          "name": "secret-key",
+          "in": "header",
+          "description": "you can find this secret in the account api section",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        { "name": "formID", "required": true, "in": "query", "schema": { "type": "string" } }
+      ],
+      "responses": { "200": { "description": "" } },
+      "tags": ["Forms"]
+    }
+  }

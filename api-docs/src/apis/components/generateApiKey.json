@@ -1,0 +1,10 @@
+{
+    "access-token": {
+      "scheme": "Bearer",
+      "bearerFormat": "Bearer",
+      "description": "[just text field] Please enter token in following format: Bearer <JWT>",
+      "name": "Authorization",
+      "type": "http",
+      "in": "Header"
+    }
+  }

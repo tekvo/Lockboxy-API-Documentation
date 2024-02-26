@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+      "objectID": { "type": "string", "description": "form id" },
+      "data": {
+        "example": [
+          { "notionCellCode": "unique cell code", "value": "value", "hubTableID": "hub table object id" }
+        ],
+        "type": "array",
+        "items": { "$ref": "#/components/schemas/FormData" }
+      }
+    },
+    "required": ["data"]
+  }

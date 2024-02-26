@@ -1,0 +1,12 @@
+{
+    "access-token": {
+      "description": "Secret key for API access.",
+      "name": "secret-key",
+      "type": "http",
+      "in": "Header",
+      "required": true,
+      "schema": {
+        "type": "string"
+      }
+    }
+  }

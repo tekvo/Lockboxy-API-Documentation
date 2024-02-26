@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+      "searchQuery": { "type": "string", "example": "search query" },
+      "column": { "type": "string", "example": "notion cell code" },
+      "direction": { "type": "string", "example": "asc/desc" },
+      "limit": { "type": "number", "example": "10" },
+      "filter": {
+        "example": [{ "operator": "string_is", "value": "value", "column": "title" }],
+        "type": "array",
+        "items": { "$ref": "#/components/schemas/Filter" }
+      },
+      "referenceObjectID": {
+        "description": "The ID of the hub table",
+        "example": "permissions",
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["filter"]
+  }

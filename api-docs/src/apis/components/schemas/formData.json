@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "formData",
+    "type": "object",
+    "properties": {
+      "objectID": {
+        "type": "string",
+        "description": "A unique identifier for the form."
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "notionCellCode": {
+              "type": "string",
+              "description": "A unique code identifying a cell within Notion."
+            },
+            "value": {
+              "type": "string",
+              "description": "The value associated with the notion cell."
+            },
+            "hubTableID": {
+              "type": "string",
+              "description": "The object ID of the hub table this data is associated with."
+            }
+          },
+          "required": ["notionCellCode", "value", "hubTableID"],
+          "description": "An item representing data to be saved, linked by notion cell code and hub table ID."
+        },
+        "description": "An array of data items to be saved."
+      }
+    },
+    "required": ["objectID", "data"],
+    "description": "Schema defining the structure for form data submission."
+  }

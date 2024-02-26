@@ -1,0 +1,46 @@
+{
+    "get": {
+      "operationId": "WorkspaceApiCallController_fetchAllForms",
+      "summary": "Get a list of forms",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Missing or invalid parameters"
+        },
+        "401": {
+          "description": "Unauthorized access"
+        }
+      },
+      "tags": ["Forms"]
+    }
+  }
+

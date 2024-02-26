@@ -1,0 +1,415 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LockBoxy",
+    "description": "API documentation for Lockboxy services including form and table management.",
+    "version": "v1",
+    "contact": {
+      "email": "thecrew@lockboxy.io"
+    }
+  },
+  "paths": {
+    "/?endpoint=form/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchAllForms",
+        "summary": "Get a list of forms",
+        "parameters": [
+          {
+            "name": "endpoint",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "default": "form/list",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "description": "Number of items per page.",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "description": "Page number for pagination.",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "secret-key",
+            "in": "header",
+            "description": "Secret key for API access.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized access"
+          }
+        },
+        "tags": [
+          "Forms"
+        ]
+      }
+    },
+    "/?endpoint=form/schema": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_findFormByID",
+        "summary": "Get form by ID",
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formID",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Forms"
+        ]
+      }
+    },
+    "/?endpoint=form/save": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_saveFormData",
+        "summary": "Save form data by form ID",
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Forms"
+        ]
+      }
+    },
+    "/?endpoint=table/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchTableList",
+        "summary": "Get form data by form ID",
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tables"
+        ]
+      }
+    },
+    "/?endpoint=table": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_fetchFormData",
+        "summary": "Get form data by table ID",
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotionQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tables"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "APIs"
+  ],
+  "servers": [
+    {
+      "url": "https://api.lockboxy.io/"
+    }
+  ],
+  "components": {
+    "generateApiKey": {
+      "access-token": {
+        "scheme": "Bearer",
+        "bearerFormat": "Bearer",
+        "description": "[just text field] Please enter token in following format: Bearer <JWT>",
+        "name": "Authorization",
+        "type": "http",
+        "in": "Header"
+      }
+    },
+    "securitySchemes": {
+      "access-token": {
+        "description": "Secret key for API access.",
+        "name": "secret-key",
+        "type": "http",
+        "in": "Header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "SaveForm": {
+        "type": "object",
+        "properties": {
+          "objectID": {
+            "type": "string",
+            "description": "form id"
+          },
+          "data": {
+            "example": [
+              {
+                "notionCellCode": "unique cell code",
+                "value": "value",
+                "hubTableID": "hub table object id"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormData"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "description": "Defines the operation to be applied for filtering. Example: 'string_is' for exact string match."
+          },
+          "value": {
+            "type": "string",
+            "description": "The value to compare against the column's data."
+          },
+          "column": {
+            "type": "string",
+            "description": "Specifies the column name on which the filter should be applied. Example: 'title'."
+          }
+        },
+        "required": [
+          "operator",
+          "value",
+          "column"
+        ],
+        "description": "Defines a filter to be applied on data, specifying the operator, value, and column for filtering."
+      },
+      "NotionQueryDto": {
+        "type": "object",
+        "properties": {
+          "searchQuery": {
+            "type": "string",
+            "example": "search query"
+          },
+          "column": {
+            "type": "string",
+            "example": "notion cell code"
+          },
+          "direction": {
+            "type": "string",
+            "example": "asc/desc"
+          },
+          "limit": {
+            "type": "number",
+            "example": "10"
+          },
+          "filter": {
+            "example": [
+              {
+                "operator": "string_is",
+                "value": "value",
+                "column": "title"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "filter"
+        ]
+      },
+      "FormData": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "formData",
+        "type": "object",
+        "properties": {
+          "objectID": {
+            "type": "string",
+            "description": "A unique identifier for the form."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "notionCellCode": {
+                  "type": "string",
+                  "description": "A unique code identifying a cell within Notion."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "The value associated with the notion cell."
+                },
+                "hubTableID": {
+                  "type": "string",
+                  "description": "The object ID of the hub table this data is associated with."
+                }
+              },
+              "required": [
+                "notionCellCode",
+                "value",
+                "hubTableID"
+              ],
+              "description": "An item representing data to be saved, linked by notion cell code and hub table ID."
+            },
+            "description": "An array of data items to be saved."
+          }
+        },
+        "required": [
+          "objectID",
+          "data"
+        ],
+        "description": "Schema defining the structure for form data submission."
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "name": "page",
+    "description": "Page number for pagination.",
+    "required": false,
+    "in": "query",
+    "schema": { "default": 1, "type": "number" }
+  }

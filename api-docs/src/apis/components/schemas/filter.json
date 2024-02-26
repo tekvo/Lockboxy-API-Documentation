@@ -1,0 +1,19 @@
+{
+    "type": "object",
+    "properties": {
+      "operator": {
+        "type": "string",
+        "description": "Defines the operation to be applied for filtering. Example: 'string_is' for exact string match."
+      },
+      "value": {
+        "type": "string",
+        "description": "The value to compare against the column's data."
+      },
+      "column": {
+        "type": "string",
+        "description": "Specifies the column name on which the filter should be applied. Example: 'title'."
+      }
+    },
+    "required": ["operator", "value", "column"],
+    "description": "Defines a filter to be applied on data, specifying the operator, value, and column for filtering."
+  }

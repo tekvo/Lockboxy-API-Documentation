@@ -1,0 +1,6 @@
+{
+    "name": "endpoint",
+    "required": true,
+    "in": "query",
+    "schema": { "default": "form/list", "type": "string" }
+}

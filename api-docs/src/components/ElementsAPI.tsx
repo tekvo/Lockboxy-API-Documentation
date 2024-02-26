@@ -9,7 +9,7 @@ export const ElementsAPI: React.FC = () => {
   // https://api.apis.guru/v2/specs/github.com/1.1.4/openapi.yaml
   return (
     <Box flex={1} overflowY="hidden">
-      <API apiDescriptionDocument={require('../swagger-spec.json')} router="hash" />
+      <API apiDescriptionDocument={require('../apis/main.json')} router="hash" />
     </Box>
   );
 };

@@ -1,0 +1,19 @@
+{
+    "get": {
+      "operationId": "WorkspaceApiCallController_fetchTableList",
+      "summary": "Get form data by form ID",
+      "parameters": [
+        {
+          "name": "secret-key",
+          "in": "header",
+          "description": "you can find this secret in the account api section",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        { "name": "page", "required": false, "in": "query", "schema": { "default": 1, "type": "number" } },
+        { "name": "limit", "required": false, "in": "query", "schema": { "default": 10, "type": "number" } }
+      ],
+      "responses": { "200": { "description": "" } },
+      "tags": ["Tables"]
+    }
+  }

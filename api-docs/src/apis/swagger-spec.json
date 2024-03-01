@@ -1,0 +1,1613 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LockBoxy",
+    "description": "API documentation for Lockboxy services including form and table management.",
+    "version": "v1",
+    "contact": {
+      "email": "thecrew@lockboxy.io"
+    }
+  },
+  "paths": {
+    "/?endpoint=form/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchAllForms",
+        "summary": "**Get your forms you created in the lockboxy**",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "data": {
+                      "items": [
+                        {
+                          "formName": "test",
+                          "formDescription": "",
+                          "hubFormID": "7c06a394-038c-4ae6-976e-484042f6fe5c",
+                          "NotionFormID": "65db3fb20d72049bd7335237",
+                          "WorkspaceID": "9cc2c50c-e6ed-41cf-a985-277eae370a8b",
+                          "themeID": "64f899da7629c15b6ccf54dc",
+                          "status": "active",
+                          "logo": null,
+                          "default": true,
+                          "formGroupName": "dqwdqw",
+                          "formGroupObjectID": "40a0ca9e-f34f-428d-9db1-2600d9939a45",
+                          "isAllAccess": 1,
+                          "userObjectID": "4b777ae3-3303-4867-a0c2-aee6d6ce33a9",
+                          "permissions": {
+                            "NA": [null]
+                          },
+                          "hubFormActiveStatus": "active",
+                          "isCreatorActive": "active",
+                          "isVerified": 1,
+                          "isObjectCreatedBy": 1
+                        }
+                      ],
+                      "pagination": {
+                        "page": 1,
+                        "pageSize": 10,
+                        "totalItems": 3,
+                        "totalPages": 1
+                      }
+                    },
+                    "message": "Success",
+                    "statusCode": 200,
+                    "timestamp": "2024-02-26T11:17:59.050Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequestException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "PackageExpiry": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T10:39:53.710Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your package has expired. Please upgrade your package.",
+                        "type": "PACKAGE_EXPIRED"
+                      },
+                      "message": "Your package has expired. Please upgrade your package."
+                    }
+                  },
+                  "DeactivateAccount": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T11:08:43.225Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services.",
+                        "type": "DEACTIVATE_ACCOUNT"
+                      },
+                      "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnauthorizedException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "WrongSecretKey": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:27:13.874Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Unauthorized: Please double check this secret key",
+                        "type": "UNAUTHORIZED"
+                      },
+                      "message": "Unauthorized: Please double check this secret key"
+                    }
+                  },
+                  "PermissionDeniedResponse": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:24:24.645Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Forms"]
+      }
+    },
+    "/?endpoint=form/schema": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_findFormSchemaByID",
+        "summary": "**Get form by ID**",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formID",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "data": {
+                      "columnName": [
+                        {
+                          "Data": ""
+                        },
+                        {
+                          "Tags": ""
+                        },
+                        {
+                          "Name": ""
+                        },
+                        {
+                          "File": ""
+                        }
+                      ],
+                      "objectID": "d9ebb277-ee57-4412-b2e9-80e4b4d72cfa"
+                    },
+                    "message": "Success",
+                    "statusCode": 200,
+                    "timestamp": "2024-02-27T13:45:45.512Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequestException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "PackageExpiry": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T10:39:53.710Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your package has expired. Please upgrade your package.",
+                        "type": "PACKAGE_EXPIRED"
+                      },
+                      "message": "Your package has expired. Please upgrade your package."
+                    }
+                  },
+                  "PrivateOrPublicErrorResponse": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T09:10:54.474Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Access restricted: This form is private and can only be accessed within your workspace. our If made public, only users with the designated secret key can access it.",
+                        "type": "PRIVATE_WORKSPACE_ACCESS_RESTRICTION"
+                      },
+                      "message": "Access restricted: This form is private and can only be accessed within your workspace. our If made public, only users with the designated secret key can access it."
+                    }
+                  },
+                  "DeactivateAccount": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T11:08:43.225Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services.",
+                        "type": "DEACTIVATE_ACCOUNT"
+                      },
+                      "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services"
+                    }
+                  },
+                  "WrongFormIDResponse": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T11:11:25.565Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 404,
+                        "message": "Data not available: The requested record does not exist, as our data service is currently disabled.",
+                        "type": "RECORD_NOT_FOUND"
+                      },
+                      "message": "Data not available: The requested record does not exist, as our data service is currently disabled."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnauthorizedException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "WrongSecretKey": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:27:13.874Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Unauthorized: Please double check this secret key",
+                        "type": "UNAUTHORIZED"
+                      },
+                      "message": "Unauthorized: Please double check this secret key"
+                    }
+                  },
+                  "PermissionDeniedResponse": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:24:24.645Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Forms"]
+      }
+    },
+    "/?endpoint=form/save": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_saveFormData",
+        "summary": "**Save form data by form ID**",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFormDataDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "data": {
+                      "statusCode": 200,
+                      "message": "Form submitted successfully!!",
+                      "type": "ADDED"
+                    },
+                    "message": "Success",
+                    "statusCode": 200,
+                    "timestamp": "2024-02-26T16:25:15.580Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequestException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "PackageExpiry": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T10:39:53.710Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your package has expired. Please upgrade your package.",
+                        "type": "PACKAGE_EXPIRED"
+                      },
+                      "message": "Your package has expired. Please upgrade your package."
+                    }
+                  },
+                  "PrivateOrPublicErrorResponse": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T09:10:54.474Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Access restricted: This form is private and can only be accessed within your workspace. our If made public, only users with the designated secret key can access it.",
+                        "type": "PRIVATE_WORKSPACE_ACCESS_RESTRICTION"
+                      },
+                      "message": "Access restricted: This form is private and can only be accessed within your workspace. our If made public, only users with the designated secret key can access it."
+                    }
+                  },
+                  "DeactivateAccount": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T11:08:43.225Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services.",
+                        "type": "DEACTIVATE_ACCOUNT"
+                      },
+                      "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services"
+                    }
+                  },
+                  "NotionTokenErrorResponse": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-27T13:47:51.598Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Kindly reach out to the administrator to reset the Notion workspace token. Thank you.",
+                        "type": "UNAUTHORIZED_NOTION_TOKEN"
+                      },
+                      "message": "Kindly reach out to the administrator to reset the Notion workspace token. Thank you."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnauthorizedException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "WrongSecretKey": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:27:13.874Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Unauthorized: Please double check this secret key",
+                        "type": "UNAUTHORIZED"
+                      },
+                      "message": "Unauthorized: Please double check this secret key"
+                    }
+                  },
+                  "PermissionDeniedResponse": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:24:24.645Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Forms"]
+      }
+    },
+    "/?endpoint=table/list": {
+      "get": {
+        "operationId": "WorkspaceApiCallController_fetchTableList",
+        "summary": "**Get all table list**",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "data": {
+                      "items": [
+                        {
+                          "tableName": "twes",
+                          "notionPageName": "Government_Policy / Har_ghar_pani",
+                          "description": "D",
+                          "synced": false,
+                          "hubTableID": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
+                          "tableGroupName": "TEST",
+                          "tableGroupObjectID": "19a0170a-71d4-41eb-a2a7-411078a1e23e",
+                          "isAllAccess": 1,
+                          "userObjectID": "4b777ae3-3303-4867-a0c2-aee6d6ce33a9",
+                          "permissions": {
+                            "NA": [null]
+                          },
+                          "hubTableActiveStatus": "disabled",
+                          "createdByID": 2,
+                          "isCreatorActive": "active",
+                          "isVerified": 1,
+                          "isObjectCreatedBy": 1
+                        }
+                      ],
+                      "pagination": {
+                        "page": 1,
+                        "pageSize": 10,
+                        "totalItems": 3,
+                        "totalPages": 1
+                      }
+                    },
+                    "message": "Success",
+                    "statusCode": 200,
+                    "timestamp": "2024-02-26T11:31:28.057Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequestException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "PackageExpiry": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T10:39:53.710Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your package has expired. Please upgrade your package.",
+                        "type": "PACKAGE_EXPIRED"
+                      },
+                      "message": "Your package has expired. Please upgrade your package."
+                    }
+                  },
+                  "DeactivateAccount": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T11:08:43.225Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services.",
+                        "type": "DEACTIVATE_ACCOUNT"
+                      },
+                      "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnauthorizedException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "WrongSecretKey": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:27:13.874Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Unauthorized: Please double check this secret key",
+                        "type": "UNAUTHORIZED"
+                      },
+                      "message": "Unauthorized: Please double check this secret key"
+                    }
+                  },
+                  "PermissionDeniedResponse": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:24:24.645Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Tables"]
+      }
+    },
+    "/?endpoint=table": {
+      "post": {
+        "operationId": "WorkspaceApiCallController_fetchFormData",
+        "summary": "**Get notion table data**",
+        "parameters": [
+          {
+            "name": "SECRET-KEY",
+            "in": "header",
+            "description": "you can find this secret in the account api section",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotionQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "data": {
+                      "data": [
+                        {
+                          "id": "21e85f58-fa2e-488a-a07b-9d067dc995ff",
+                          "space_id": "235adda5-4aeb-4112-9149-fde1c0422fd4",
+                          "Id_Number": null,
+                          "key": "eX@K",
+                          "type": "number",
+                          "Id_pic": "",
+                          "Home_pic": "",
+                          "Upload Pic": ""
+                        }
+                      ],
+                      "schema": [
+                        {
+                          "_id": "65dabad9c1fad9823b6a3624",
+                          "pageId": "4b188316-360e-40be-af1e-5d639b8d31c6",
+                          "viewId": "89a26eab-cd2a-4406-91aa-922aed54c367",
+                          "hubTableID": 39,
+                          "name": "Amount ",
+                          "field": "Amount ",
+                          "type": "number",
+                          "editor": "input",
+                          "title": "Amount ",
+                          "editorParams": {
+                            "multiselect": false
+                          },
+                          "notionCellCode": "<vNI",
+                          "hideFieldData": false,
+                          "pii": false,
+                          "onlyVisibleAdmin": false,
+                          "options": [],
+                          "createdByUser": "2",
+                          "createdAt": "2024-02-25T03:58:17.448Z",
+                          "updatedAt": "2024-02-25T03:58:17.448Z",
+                          "__v": 0
+                        }
+                      ],
+                      "space_id": "235adda5-4aeb-4112-9149-fde1c0422fd4",
+                      "parent_id": "af93dcce-056e-49f0-9d95-0487f48ce2fd",
+                      "notionUserId": "896aac3c-a68b-4558-bdf2-5082975568d0",
+                      "totalRecords": 5,
+                      "hasMore": false
+                    },
+                    "message": "Success",
+                    "statusCode": 200,
+                    "timestamp": "2024-02-26T16:02:10.018Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequestException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "PackageExpiry": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-26T10:39:53.710Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your package has expired. Please upgrade your package.",
+                        "type": "PACKAGE_EXPIRED"
+                      },
+                      "message": "Your package has expired. Please upgrade your package."
+                    }
+                  },
+                  "DeactivateAccount": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-29T11:08:43.225Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 400,
+                        "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services.",
+                        "type": "DEACTIVATE_ACCOUNT"
+                      },
+                      "message": "Your account is currently deactivated. Please activate your account to enjoy Notion services"
+                    }
+                  },
+                  "ObjectLevelAccessErrorResponse": {
+                    "value": {
+                      "statusCode": 400,
+                      "timestamp": "2024-02-27T04:00:25.722Z",
+                      "error": "BadRequestException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnauthorizedException",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "WrongSecretKey": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:27:13.874Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Unauthorized: Please double check this secret key",
+                        "type": "UNAUTHORIZED"
+                      },
+                      "message": "Unauthorized: Please double check this secret key"
+                    }
+                  },
+                  "PermissionDeniedResponse": {
+                    "value": {
+                      "statusCode": 401,
+                      "timestamp": "2024-02-26T10:24:24.645Z",
+                      "error": "UnauthorizedException",
+                      "data": {
+                        "statusCode": 401,
+                        "message": "Permission denied. Please contact the administrator for assistance.",
+                        "type": "PERMISSION_DENIED"
+                      },
+                      "message": "Permission denied. Please contact the administrator for assistance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Tables"]
+      }
+    }
+  },
+
+  "tags": ["APIs"],
+  "servers": [
+    {
+      "url": "https://api.lockboxy.io/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "access-token": {
+        "description": "Secret key for API access.",
+        "name": "secret-key",
+        "type": "http",
+        "in": "Header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "RemoveRowNotionDto": {
+        "type": "object",
+        "properties": {
+          "spaceId": {
+            "type": "string"
+          },
+          "rowID": {
+            "type": "string"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SchemaObject": {
+        "type": "object",
+        "properties": {
+          "hideFieldData": {
+            "type": "boolean"
+          },
+          "onlyVisibleAdmin": {
+            "type": "boolean"
+          },
+          "pii": {
+            "type": "boolean"
+          },
+          "fieldID": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateNotionSchemaDto": {
+        "type": "object",
+        "properties": {
+          "schemas": {
+            "example": [
+              {
+                "hideFieldData": false,
+                "onlyVisibleAdmin": false,
+                "pii": false,
+                "fieldID": "field id"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SchemaObject"
+            }
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["schemas"]
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "string",
+            "example": "notion cell code"
+          },
+          "operator": {
+            "type": "string",
+            "example": "operator"
+          },
+          "value": {
+            "type": "string",
+            "example": "value for filter"
+          }
+        },
+        "required": ["column", "operator", "value"]
+      },
+      "NotionQueryDto": {
+        "type": "object",
+        "properties": {
+          "searchQuery": {
+            "type": "string",
+            "example": "search query"
+          },
+          "column": {
+            "type": "string",
+            "example": "notion cell code"
+          },
+          "direction": {
+            "type": "string",
+            "example": "asc/desc"
+          },
+          "limit": {
+            "type": "number",
+            "example": "10"
+          },
+          "filter": {
+            "example": [
+              {
+                "operator": "string_is",
+                "value": "value",
+                "column": "title"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NotionColumnDataQueryDto": {
+        "type": "object",
+        "properties": {
+          "notionCellCode": {
+            "type": "string",
+            "description": "Notion cell code",
+            "example": ":}qw"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateNewRowDto": {
+        "type": "object",
+        "properties": {
+          "spaceId": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "afterRow": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "notionCellCode": {
+            "type": "string"
+          },
+          "notionUserId": {
+            "type": "string"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "[permissions]",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateNotionCellDto": {
+        "type": "object",
+        "properties": {
+          "spaceId": {
+            "type": "string"
+          },
+          "rowID": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "notionCellCode": {
+            "type": "string"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": "permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Options": {
+        "type": "object",
+        "properties": {
+          "option": {
+            "type": "string",
+            "example": "this is column name"
+          },
+          "color": {
+            "type": "string",
+            "example": "this is column type"
+          }
+        }
+      },
+      "UpdateAudit": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string",
+            "example": "this is column name"
+          },
+          "columnType": {
+            "type": "string",
+            "example": "this is column type"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": ["tableObjectID"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Options"
+            }
+          }
+        }
+      },
+      "RefreshFile": {
+        "type": "object",
+        "properties": {
+          "fileUrl": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      },
+      "AddNotionTablesDto": {
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "example": "page name"
+          },
+          "notionPageName": {
+            "type": "string",
+            "example": "notion page name"
+          },
+          "pageCode": {
+            "type": "string",
+            "example": "notion page id"
+          },
+          "description": {
+            "type": "string",
+            "example": "this is notion page id"
+          },
+          "userObjectID": {
+            "type": "string",
+            "description": "The ID of the user workspace set",
+            "example": "string"
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether the table is the default one in the workspace",
+            "example": true
+          },
+          "tableGroupID": {
+            "type": "string",
+            "description": "The ID of the table group the table belongs to"
+          }
+        },
+        "required": ["tableGroupID"]
+      },
+      "UpdateNotionTablesDto": {
+        "type": "object",
+        "properties": {
+          "pageCode": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "tableGroupID": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "example": "this is notion page id"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": ["permissions"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ReferenceObjectID": {
+        "type": "object",
+        "properties": {
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": ["permissions"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["referenceObjectID"]
+      },
+      "AddTableGroup": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "This is a table group name."
+          },
+          "description": {
+            "type": "string",
+            "description": "This is a table group type."
+          }
+        },
+        "required": ["groupName", "description"]
+      },
+      "UpdateGroupTable": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "This is a table group name."
+          },
+          "description": {
+            "type": "string",
+            "description": "This is a table group type."
+          }
+        }
+      },
+      "QueryBodyDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "pageId": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          }
+        }
+      },
+      "ObjectPermission": {
+        "type": "object",
+        "properties": {
+          "screenCode": {
+            "type": "string",
+            "description": "The code for the screen associated with the permission",
+            "example": "users"
+          },
+          "screenID": {
+            "type": "string",
+            "description": "The code for the screen associated with the permission",
+            "example": "users"
+          },
+          "controlCode": {
+            "description": "The codes for the controls associated with the permission",
+            "example": ["create", "edit", "delete"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateObjectLevelAccessDto": {
+        "type": "object",
+        "properties": {
+          "userObjectID": {
+            "type": "string",
+            "description": "The ID of the user workspace set",
+            "example": "string"
+          },
+          "referenceObjectID": {
+            "description": "The ID of the hub table",
+            "example": ["hubTableObjectID"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "permissions": {
+            "description": "The permissions associated with the role",
+            "example": [
+              {
+                "screenCode": "users",
+                "controlCode": ["create", "edit", "delete"]
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectPermission"
+            }
+          },
+          "expiredDate": {
+            "type": "string",
+            "description": "The expiration date for the object in ISO 8601 format (YYYY-MM-DD)",
+            "example": ""
+          }
+        },
+        "required": ["referenceObjectID", "permissions"]
+      },
+      "DeleteObjectLevelAccess": {
+        "type": "object",
+        "properties": {
+          "referenceObjectID": {
+            "description": "The ID of the hub table our hub form",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userWorkspaceSetID": {
+            "description": "The ID of the user workspace set to search for",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AddRolePermission": {
+        "type": "object",
+        "properties": {
+          "roleID": {
+            "type": "string",
+            "description": "The name of the role",
+            "example": "Admin"
+          },
+          "permissions": {
+            "description": "The permissions associated with the role",
+            "example": [
+              {
+                "screenCode": "users",
+                "controlCode": ["create", "edit", "delete"]
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          }
+        },
+        "required": ["roleID", "permissions"]
+      },
+
+      "CreateNotionFormDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "hubFromGroupID": {
+            "type": "string"
+          },
+          "hubTableID": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "themeID": {
+            "type": "string"
+          },
+          "field": {
+            "example": {
+              "pageId": "",
+              "viewId": "",
+              "hubTableID": "",
+              "name": "",
+              "field": "",
+              "type": "",
+              "editor": "",
+              "title": "",
+              "notionCellCode": "",
+              "hideFieldData": false,
+              "pii": false,
+              "onlyVisibleAdmin": false,
+              "options": "[]",
+              "createdByUser": "",
+              "createdAt": "",
+              "updatedAt": "",
+              "placeholder": "",
+              "label": "",
+              "isRequired": false,
+              "preFilled": "",
+              "isHidden": false,
+              "position": 0
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Field"
+              }
+            ]
+          },
+          "preDefinedButtons": {
+            "example": [
+              {
+                "label": "",
+                "type": "",
+                "theme": "",
+                "isHidden": true
+              }
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PreDefinedButtons"
+              }
+            ]
+          },
+          "waterMark": {
+            "type": "boolean",
+            "example": true
+          },
+          "isPublic": {
+            "type": "boolean",
+            "example": true
+          },
+          "isLogoHidden": {
+            "type": "boolean",
+            "example": true
+          },
+          "isSocialMedia": {
+            "type": "boolean",
+            "example": true
+          },
+          "costumeMessages": {
+            "type": "boolean",
+            "example": true
+          },
+          "footer": {
+            "type": "string",
+            "example": ""
+          },
+          "message": {
+            "type": "string",
+            "example": ""
+          },
+          "failedMessage": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "required": ["title", "name", "hubFromGroupID", "hubTableID", "isLogoHidden"]
+      },
+      "CreateNotionFormWithFileDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "formData": {
+            "example": {},
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreateNotionFormDto"
+              }
+            ]
+          }
+        },
+        "required": ["file"]
+      },
+      "UpdateNotionFormDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "hubFromGroupID": {
+            "type": "string"
+          },
+          "hubTableID": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "themeID": {
+            "type": "string"
+          },
+          "field": {
+            "example": {
+              "pageId": "",
+              "viewId": "",
+              "hubTableID": "",
+              "name": "",
+              "field": "",
+              "type": "",
+              "editor": "",
+              "title": "",
+              "notionCellCode": "",
+              "hideFieldData": false,
+              "pii": false,
+              "onlyVisibleAdmin": false,
+              "options": "[]",
+              "createdByUser": "",
+              "createdAt": "",
+              "updatedAt": "",
+              "placeholder": "",
+              "label": "",
+              "isRequired": false,
+              "preFilled": "",
+              "isHidden": false,
+              "position": 0
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Field"
+              }
+            ]
+          },
+          "preDefinedButtons": {
+            "example": [
+              {
+                "label": "",
+                "type": "",
+                "theme": "",
+                "isHidden": true
+              }
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PreDefinedButtons"
+              }
+            ]
+          },
+          "waterMark": {
+            "type": "boolean",
+            "example": true
+          },
+          "isLogoHidden": {
+            "type": "boolean",
+            "example": true
+          },
+          "isPublic": {
+            "type": "boolean",
+            "example": true
+          },
+          "isSocialMedia": {
+            "type": "boolean",
+            "example": true
+          },
+          "costumeMessages": {
+            "type": "boolean",
+            "example": true
+          },
+          "footer": {
+            "type": "string",
+            "example": ""
+          },
+          "message": {
+            "type": "string",
+            "example": ""
+          },
+          "failedMessage": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      },
+      "UpdateNotionFormWithFileDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "formData": {
+            "example": {},
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UpdateNotionFormDto"
+              }
+            ]
+          },
+          "referenceObjectID": {
+            "example": ["HubFormID"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "FormData": {
+        "type": "object",
+        "properties": {
+          "hubTableID": {
+            "type": "string"
+          },
+          "notionCellCode": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "SaveForm": {
+        "type": "object",
+        "properties": {
+          "objectID": {
+            "type": "string",
+            "description": "form id"
+          },
+          "data": {
+            "example": [
+              {
+                "notionCellCode": "unique cell code",
+                "value": "value",
+                "hubTableID": "hub table object id"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormData"
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "ReferenceObject": {
+        "type": "object",
+        "properties": {
+          "referenceObjectID": {
+            "example": ["hubFormID"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["referenceObjectID"]
+      },
+
+      "CustomFormDataDto": {
+        "type": "object",
+        "properties": {
+          "objectID": {
+            "type": "string",
+            "example": "f0808581-cb39-14-9a9d-0240a3a0d6"
+          },
+          "columnName": {
+            "type": "string",
+            "example": [
+              {
+                "ID_Proof": "kjdjbe"
+              },
+              {
+                "Id_Number": "sdjksid"
+              },
+              {
+                "Name": "dkjcnks"
+              },
+              {
+                "Upload_Pic": "sjnd"
+              },
+              {
+                "Hobbies": "jbdiuy"
+              }
+            ]
+          }
+        },
+        "required": ["objectID", "columnName"]
+      }
+    }
+  }
+}

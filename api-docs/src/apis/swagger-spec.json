@@ -12,12 +12,12 @@
     "/?endpoint=form/list": {
       "get": {
         "operationId": "WorkspaceApiCallController_fetchAllForms",
-        "summary": "**Get your forms you created in the lockboxy**",
+        "summary": "Get a list of forms",
         "parameters": [
           {
-            "name": "SECRET-KEY",
+            "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"
@@ -26,6 +26,7 @@
           {
             "name": "page",
             "required": false,
+            "description": "Page number for pagination.",
             "in": "query",
             "schema": {
               "default": 1,
@@ -35,6 +36,7 @@
           {
             "name": "limit",
             "required": false,
+            "description": "Number of items per page.",
             "in": "query",
             "schema": {
               "default": 10,
@@ -166,12 +168,12 @@
     "/?endpoint=form/schema": {
       "get": {
         "operationId": "WorkspaceApiCallController_findFormSchemaByID",
-        "summary": "**Get form by ID**",
+        "summary": "Get form schema by ID",
         "parameters": [
           {
-            "name": "SECRET-KEY",
+            "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"
@@ -321,12 +323,12 @@
     "/?endpoint=form/save": {
       "post": {
         "operationId": "WorkspaceApiCallController_saveFormData",
-        "summary": "**Save form data by form ID**",
+        "summary": "Save data by form ID",
         "parameters": [
           {
-            "name": "SECRET-KEY",
+            "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"
@@ -466,12 +468,12 @@
     "/?endpoint=table/list": {
       "get": {
         "operationId": "WorkspaceApiCallController_fetchTableList",
-        "summary": "**Get all table list**",
+        "summary": "Get a list of tables",
         "parameters": [
           {
-            "name": "SECRET-KEY",
+            "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"
@@ -480,6 +482,7 @@
           {
             "name": "page",
             "required": false,
+            "description": "Page number for pagination.",
             "in": "query",
             "schema": {
               "default": 1,
@@ -488,6 +491,7 @@
           },
           {
             "name": "limit",
+            "description": "Number of items per page.",
             "required": false,
             "in": "query",
             "schema": {
@@ -617,12 +621,12 @@
     "/?endpoint=table": {
       "post": {
         "operationId": "WorkspaceApiCallController_fetchFormData",
-        "summary": "**Get notion table data**",
+        "summary": "Get Data by table ID",
         "parameters": [
           {
-            "name": "SECRET-KEY",
+            "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"
@@ -786,7 +790,6 @@
       }
     }
   },
-
   "tags": ["APIs"],
   "servers": [
     {

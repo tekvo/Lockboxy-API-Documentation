@@ -57,12 +57,12 @@
       "eslint --fix"
     ]
   },
-  // "husky": {
-  //   "hooks": {
-  //     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-  //     "pre-commit": "lint-staged"
-  //   }
-  // },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"

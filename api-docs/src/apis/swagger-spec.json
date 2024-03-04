@@ -54,24 +54,14 @@
                         {
                           "formName": "test",
                           "formDescription": "",
-                          "hubFormID": "7c06a394-038c-4ae6-976e-484042f6fe5c",
-                          "NotionFormID": "65db3fb20d72049bd7335237",
-                          "WorkspaceID": "9cc2c50c-e6ed-41cf-a985-277eae370a8b",
-                          "themeID": "64f899da7629c15b6ccf54dc",
-                          "status": "active",
-                          "logo": null,
-                          "default": true,
-                          "formGroupName": "dqwdqw",
-                          "formGroupObjectID": "40a0ca9e-f34f-428d-9db1-2600d9939a45",
-                          "isAllAccess": 1,
-                          "userObjectID": "4b777ae3-3303-4867-a0c2-aee6d6ce33a9",
-                          "permissions": {
-                            "NA": [null]
-                          },
-                          "hubFormActiveStatus": "active",
-                          "isCreatorActive": "active",
-                          "isVerified": 1,
-                          "isObjectCreatedBy": 1
+                          "formID": "7c06a394-038c-4ae6-976e-484042f6fe5c",
+                          "formGroupName": "dqwdqw"
+                        },
+                        {
+                          "formName": "goverment scheme",
+                          "formDescription": "central gov. scheme",
+                          "formID": "f0808581-cb39-4d14-9a9d-0240a3a0d692",
+                          "formGroupName": "dqwdqw"
                         }
                       ],
                       "pagination": {
@@ -507,22 +497,15 @@
                       "items": [
                         {
                           "tableName": "twes",
-                          "notionPageName": "Government_Policy / Har_ghar_pani",
-                          "description": "D",
-                          "synced": false,
-                          "hubTableID": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
-                          "tableGroupName": "TEST",
-                          "tableGroupObjectID": "19a0170a-71d4-41eb-a2a7-411078a1e23e",
-                          "isAllAccess": 1,
-                          "userObjectID": "4b777ae3-3303-4867-a0c2-aee6d6ce33a9",
-                          "permissions": {
-                            "NA": [null]
-                          },
-                          "hubTableActiveStatus": "disabled",
-                          "createdByID": 2,
-                          "isCreatorActive": "active",
-                          "isVerified": 1,
-                          "isObjectCreatedBy": 1
+                          "tableDescription": "D",
+                          "tableID": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
+                          "tableGroupName": "TEST"
+                        },
+                        {
+                          "tableName": "Stater_package_Goverment_policy",
+                          "tableDescription": "dffwefwe",
+                          "tableID": "1ed74617-a443-421f-b46b-25eb14558832",
+                          "tableGroupName": "sdw"
                         }
                       ],
                       "pagination": {

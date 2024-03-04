@@ -103,7 +103,7 @@
           {
             "name": "secret-key",
             "in": "header",
-            "description": "you can find this secret in the account api section",
+            "description": "Secret key for API access",
             "required": true,
             "schema": {
               "type": "string"

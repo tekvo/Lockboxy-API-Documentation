@@ -28,6 +28,7 @@ jobs:
     - name: Build Documentation
       run: |
         yarn global add rimraf
+        yarn install
         yarn api-docs build
 
     - name: Deploy to GitHub Pages

@@ -853,19 +853,6 @@
           }
         }
       },
-      "Options": {
-        "type": "object",
-        "properties": {
-          "option": {
-            "type": "string",
-            "example": "this is column name"
-          },
-          "color": {
-            "type": "string",
-            "example": "this is column type"
-          }
-        }
-      },
       "FormData": {
         "type": "object",
         "properties": {

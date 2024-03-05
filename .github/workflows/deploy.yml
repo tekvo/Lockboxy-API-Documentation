@@ -14,15 +14,20 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
+        cache: npm
+        node-version: 20.8.1
+
+    - name: Install dependencies
+      run: npm install --force
 
     # Add steps for other dependencies your project might have
 
     - name: Build Documentation
       run: |
+        yarn global add rimraf
         yarn api-docs build
 
     - name: Deploy to GitHub Pages

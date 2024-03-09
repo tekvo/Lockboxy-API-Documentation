@@ -345,8 +345,8 @@
             "example": [
               {
                 "operator": "string_is",
-                "value": "value",
-                "column": "title"
+                "value": "Alice Johnson",
+                "column": "name"
               }
             ],
             "type": "array",

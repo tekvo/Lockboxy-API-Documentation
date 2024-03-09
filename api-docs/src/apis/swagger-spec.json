@@ -54,16 +54,16 @@
                     "data": {
                       "items": [
                         {
-                          "formName": "test",
-                          "formDescription": "",
-                          "formID": "7c06a394-038c-4ae6-976e-484042f6fe5c",
-                          "formGroupName": "dqwdqw"
+                          "formName": "Survey Form",
+                          "formDescription": "Collecting feedback from users.",
+                          "formID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                          "formGroupName": "User Feedback Group"
                         },
                         {
-                          "formName": "goverment scheme",
-                          "formDescription": "central gov. scheme",
-                          "formID": "f0808581-cb39-4d14-9a9d-0240a3a0d692",
-                          "formGroupName": "dqwdqw"
+                          "formName": "Registration Form",
+                          "formDescription": "Capturing user details for registration.",
+                          "formID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                          "formGroupName": "User Registration Group"
                         }
                       ],
                       "pagination": {
@@ -500,16 +500,16 @@
                     "data": {
                       "items": [
                         {
-                          "tableName": "twes",
-                          "tableDescription": "D",
-                          "tableID": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
-                          "tableGroupName": "TEST"
+                          "tableName": "SampleTable",
+                          "tableDescription": "This is a sample table for testing purposes.",
+                          "tableID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                          "tableGroupName": "TestGroup"
                         },
                         {
-                          "tableName": "Stater_package_Goverment_policy",
-                          "tableDescription": "dffwefwe",
-                          "tableID": "1ed74617-a443-421f-b46b-25eb14558832",
-                          "tableGroupName": "sdw"
+                          "tableName": "PolicyTable",
+                          "tableDescription": "Government policy data for analysis.",
+                          "tableID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                          "tableGroupName": "PolicyGroup"
                         }
                       ],
                       "pagination": {
@@ -652,11 +652,11 @@
                           "pageId": "4b188316-360e-40be-af1e-5d639b8d31c6",
                           "viewId": "89a26eab-cd2a-4406-91aa-922aed54c367",
                           "hubTableID": 39,
-                          "name": "Amount ",
-                          "field": "Amount ",
-                          "type": "number",
+                          "name": "Name",
+                          "field": "Name",
+                          "type": "string",
                           "editor": "input",
-                          "title": "Amount ",
+                          "title": "Name",
                           "editorParams": {
                             "multiselect": false
                           },
@@ -816,7 +816,7 @@
         "properties": {
           "searchQuery": {
             "type": "string",
-            "example": "search query"
+            "example": "Registration"
           },
           "column": {
             "type": "string",
@@ -834,8 +834,8 @@
             "example": [
               {
                 "operator": "string_is",
-                "value": "value",
-                "column": "title"
+                "value": "Alice Johnson",
+                "column": "name"
               }
             ],
             "type": "array",
@@ -875,25 +875,25 @@
         "properties": {
           "objectID": {
             "type": "string",
-            "example": "f0808581-cb39-14-9a9d-0240a3a0d6"
+            "example":"xxxxxxxx-xxxx-xx-xxxx-xxxxxxxxxxxx"
           },
           "columnName": {
             "type": "string",
             "example": [
               {
-                "ID_Proof": "kjdjbe"
+                "ID_Proof": "passport123"
               },
               {
-                "Id_Number": "sdjksid"
+                "Id_Number": "987654321"
               },
               {
-                "Name": "dkjcnks"
+                "Name": "Alice Johnson"
               },
               {
-                "Upload_Pic": "sjnd"
+                "Upload_Pic": "profile_pic.jpg"
               },
               {
-                "Hobbies": "jbdiuy"
+                "Hobbies": "Reading, Traveling"
               }
             ]
           }

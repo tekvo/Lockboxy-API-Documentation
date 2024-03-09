@@ -651,7 +651,7 @@
                           "_id": "65dabad9c1fad9823b6a3624",
                           "pageId": "4b188316-360e-40be-af1e-5d639b8d31c6",
                           "viewId": "89a26eab-cd2a-4406-91aa-922aed54c367",
-                          "hubTableID": 39,
+                          "hubTableID": 40,
                           "name": "Name",
                           "field": "Name",
                           "type": "string",
@@ -798,15 +798,15 @@
         "properties": {
           "column": {
             "type": "string",
-            "example": "notion cell code"
+            "example": "EbydR"
           },
           "operator": {
             "type": "string",
-            "example": "operator"
+            "example": "string_is"
           },
           "value": {
             "type": "string",
-            "example": "value for filter"
+            "example": "Alice Johnsonr"
           }
         },
         "required": ["column", "operator", "value"]
@@ -835,7 +835,7 @@
               {
                 "operator": "string_is",
                 "value": "Alice Johnson",
-                "column": "name"
+                "column": "EbydR"
               }
             ],
             "type": "array",
@@ -845,7 +845,7 @@
           },
           "referenceObjectID": {
             "description": "The ID of the hub table",
-            "example": "permissions",
+            "example": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
             "type": "array",
             "items": {
               "type": "string"
@@ -875,7 +875,7 @@
         "properties": {
           "objectID": {
             "type": "string",
-            "example":"xxxxxxxx-xxxx-xx-xxxx-xxxxxxxxxxxx"
+            "example":"d9ebb277-ee57-4412-b2e9-80e4b4d72cfa"
           },
           "columnName": {
             "type": "string",

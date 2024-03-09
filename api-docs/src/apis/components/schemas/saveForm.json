@@ -4,7 +4,7 @@
       "objectID": { "type": "string", "description": "form id" },
       "data": {
         "example": [
-          { "notionCellCode": "unique cell code", "value": "value", "hubTableID": "hub table object id" }
+          { "notionCellCode": "unique cell code", "value": "value", "hubTableID": "40" }
         ],
         "type": "array",
         "items": { "$ref": "#/components/schemas/FormData" }

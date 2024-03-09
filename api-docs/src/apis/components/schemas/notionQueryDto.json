@@ -12,7 +12,7 @@
       },
       "referenceObjectID": {
         "description": "The ID of the hub table",
-        "example": "permissions",
+        "example": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
         "type": "array",
         "items": { "type": "string" }
       }

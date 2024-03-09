@@ -286,7 +286,7 @@
               {
                 "notionCellCode": "unique cell code",
                 "value": "value",
-                "hubTableID": "hub table object id"
+                "hubTableID": "40"
               }
             ],
             "type": "array",
@@ -346,7 +346,7 @@
               {
                 "operator": "string_is",
                 "value": "Alice Johnson",
-                "column": "name"
+                "column": "EbydR"
               }
             ],
             "type": "array",
@@ -356,7 +356,7 @@
           },
           "referenceObjectID": {
             "description": "The ID of the hub table",
-            "example": "permissions",
+            "example": "820a6677-5939-41c2-ba6b-8ad3721bc2b3",
             "type": "array",
             "items": {
               "type": "string"
